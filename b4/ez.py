@@ -1295,7 +1295,7 @@ def cmd_send(cmdargs: argparse.Namespace) -> None:
             sys.exit(1)
 
         try:
-            todests, ccdests, tag_msg, patches = get_prep_branch_as_patches()
+            todests, ccdests, tag_msg, patches = get_prep_branch_as_patches(samethread=cmdargs.same_thread)
         except RuntimeError as ex:
             logger.critical('CRITICAL: Failed to convert range to patches: %s', ex)
             sys.exit(1)

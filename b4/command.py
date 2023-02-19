@@ -323,6 +323,8 @@ def setup_parser() -> argparse.ArgumentParser:
                          help='Resend a previously sent version of the series')
     sp_send.add_argument('--no-sign', action='store_true', default=False,
                          help='Do not add the cryptographic attestation signature header')
+    sp_send.add_argument('--same-thread', action='store_true', default=False,
+                         help='Keep all versions in the same thread')
     ag_sendh = sp_send.add_argument_group('Web submission', 'Authenticate with the web submission endpoint')
     ag_sendh.add_argument('--web-auth-new', dest='auth_new', action='store_true', default=False,
                           help='Initiate a new web authentication request')

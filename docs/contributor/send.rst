@@ -233,6 +233,11 @@ Command line flags
 ``--not-me-too``
   Removes your own email address from the recipients.
 
+``--same-thread``
+  When sending a new version of a series, make it part of the same
+  thread as the previous one. The first mail will be sent as a reply
+  to the previous version's cover letter.
+
 ``--no-sign``
   Don't sign your patches with your configured attestation mechanism.
   Note, that patch signing is required for the web submission endpoint,
