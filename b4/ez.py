@@ -1117,7 +1117,8 @@ def get_mailfrom() -> Tuple[str, str]:
     return usercfg.get('name'), usercfg.get('email')
 
 
-def get_prep_branch_as_patches(movefrom: bool = True, thread: bool = True, addtracking: bool = True
+def get_prep_branch_as_patches(movefrom: bool = True, thread: bool = True, addtracking: bool = True,
+                               samethread: bool = False
                                ) -> Tuple[List, List, str, List[Tuple[str, email.message.Message]]]:
     cover, tracking = load_cover(strip_comments=True)
 
@@ -1190,6 +1191,12 @@ def get_prep_branch_as_patches(movefrom: bool = True, thread: bool = True, addtr
 
     if addtracking:
         patches[0][1].add_header('X-B4-Tracking', thdata)
+
+    if samethread and revision > 1:
+        oldrev = revision - 1
+        voldrev =  f'v{oldrev}'
+        oldmsgid =  tracking['series']['history'][voldrev][-1]
+        patches[0][1].add_header('In-Reply-To', f'<{oldmsgid}>')
 
     tag_msg = f'{csubject.full_subject}\n\n{cover_letter}'
     return alltos, allccs, tag_msg, patches
